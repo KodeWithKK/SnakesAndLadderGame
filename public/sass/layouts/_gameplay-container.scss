@@ -1,0 +1,136 @@
+.container-gameplay {
+
+  .board {
+    position: relative;
+    height: 80vh;
+
+    @include screenMaxWidth(calc(105vh + 200px)) {
+      height: 85vw;
+    }
+
+    .board-img {
+      position: relative;
+      height:100%;
+      aspect-ratio: 1/1;
+      border-radius: 1rem;
+      filter: hue-rotate(146deg) brightness(90%) contrast(108%);
+      border: 1px solid var(--colorContainerBorder);
+
+      @include screenMaxWidth(986px) {
+        filter: hue-rotate(146deg) brightness(90%) contrast(108%) saturate(90%);
+      }
+    }
+
+    .container-winner {
+      display: none;
+      position: absolute;
+      border-radius: 1rem;
+      z-index: 15;
+      width: 100%;
+      height: 100%;
+      right: 0; top: 0;
+      overflow: hidden;
+    }
+
+    .container-winner__bg {
+      background: conic-gradient(hsla(340deg, 100%, 83%, 0.925) 0deg, hsla(340deg, 100%, 83%, 0.925) 30deg,
+      hsla(340deg, 100%, 70%, 0.925) 30deg, hsla(340deg, 100%, 70%, 0.925) 60deg,
+      hsla(340deg, 100%, 83%, 0.925) 60deg, hsla(340deg, 100%, 83%, 0.925) 90deg,
+      hsla(340deg, 100%, 70%, 0.925) 90deg, hsla(340deg, 100%, 70%, 0.925) 120deg,
+      hsla(340deg, 100%, 83%, 0.925) 120deg, hsla(340deg, 100%, 83%, 0.925) 150deg,
+      hsla(340deg, 100%, 70%, 0.925) 150deg, hsla(340deg, 100%, 70%, 0.925) 180deg,
+      hsla(340deg, 100%, 83%, 0.925) 180deg, hsla(340deg, 100%, 83%, 0.925) 210deg,
+      hsla(340deg, 100%, 70%, 0.925) 210deg, hsla(340deg, 100%, 70%, 0.925) 240deg,
+      hsla(340deg, 100%, 83%, 0.925) 240deg, hsla(340deg, 100%, 83%, 0.925) 270deg,
+      hsla(340deg, 100%, 70%, 0.925) 270deg, hsla(340deg, 100%, 70%, 0.925) 300deg,
+      hsla(340deg, 100%, 83%, 0.925) 300deg, hsla(340deg, 100%, 83%, 0.925) 330deg,
+      hsla(340deg, 100%, 70%, 0.925) 330deg, hsla(340deg, 100%, 70%, 0.925) 360deg);
+
+      @include screenMaxWidth(calc(105vh + 200px)) {
+        background: conic-gradient(hsla(340deg, 90%, 83%, 0.925) 0deg, hsla(340deg, 90%, 83%, 0.925) 30deg,
+        hsla(340deg, 90%, 70%, 0.925) 30deg, hsla(340deg, 90%, 70%, 0.925) 60deg,
+        hsla(340deg, 90%, 83%, 0.925) 60deg, hsla(340deg, 90%, 83%, 0.925) 90deg,
+        hsla(340deg, 90%, 70%, 0.925) 90deg, hsla(340deg, 90%, 70%, 0.925) 120deg,
+        hsla(340deg, 90%, 83%, 0.925) 120deg, hsla(340deg, 90%, 83%, 0.925) 150deg,
+        hsla(340deg, 90%, 70%, 0.925) 150deg, hsla(340deg, 90%, 70%, 0.925) 180deg,
+        hsla(340deg, 90%, 83%, 0.925) 180deg, hsla(340deg, 90%, 83%, 0.925) 210deg,
+        hsla(340deg, 90%, 70%, 0.925) 210deg, hsla(340deg, 90%, 70%, 0.925) 240deg,
+        hsla(340deg, 90%, 83%, 0.925) 240deg, hsla(340deg, 90%, 83%, 0.925) 270deg,
+        hsla(340deg, 90%, 70%, 0.925) 270deg, hsla(340deg, 90%, 70%, 0.925) 300deg,
+        hsla(340deg, 90%, 83%, 0.925) 300deg, hsla(340deg, 90%, 83%, 0.925) 330deg,
+        hsla(340deg, 90%, 70%, 0.925) 330deg, hsla(340deg, 90%, 70%, 0.925) 360deg);
+      }
+
+      position: absolute;
+      left: 50%; top: 50%;
+      translate: -50% -50%;
+      height: 142%; /* Equivalent to daignal of board image */
+      width: 142%;
+      animation: rotating-background 14s linear infinite, zoom-in 1s ease;
+
+    }
+
+    .container-winner__content {
+      animation: zoom-in 2s ease;
+      text-align: center;
+      position: absolute;
+      width: 80%;
+      left: 50%; top: 50%;
+      translate: -50% -50%;
+      z-index: 20;
+
+      @include screenMaxWidth(calc(105vh + 200px)) {
+        animation: zoom-in-sd 2s ease;
+        scale: 0.8;
+      }
+
+      .winner-text {
+        margin-bottom: 2rem;
+        font-size: 2.2rem;
+        font-weight: 600;
+      }
+
+      .trophy-img {
+        object-fit: contain;
+        height: 15rem;
+        margin-bottom: 2rem;
+        transition: 0.3s ease;
+        filter: drop-shadow(0 0rem 4rem hsla(355deg, 81% ,6%, 70%));
+      }
+    }
+
+  }
+
+  .container-dice-n-roll-btn {
+    position: relative;
+    background: var(--colorBgDarker);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3.5rem;
+    height: calc(15vh - 1rem);
+    margin-top: 1rem;
+    width: 80vh;
+    border-radius: 1rem;
+    border: 1px solid var(--colorContainerBorder);
+
+    @include screenMaxWidth(calc(105vh + 200px)) {
+      margin-top: 0rem;
+      position: fixed;
+      left: 0; bottom: 0;
+      height: 8rem;
+      width: 100%;
+      border-radius: 1rem 1rem 0 0;
+      border: 0;
+      border-top: 1px solid var(--colorContainerBorder);
+      z-index: 25;
+    }
+  }
+
+  .dice-img {
+    display: inline-block;
+    object-fit: contain;
+    height: 75%;
+  }
+
+}

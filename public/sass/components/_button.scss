@@ -1,0 +1,44 @@
+.btn {
+  position: relative;
+  display: solid;
+  height: 4.5rem;
+  width: 15rem;
+  border: 0;
+  background: none;
+  border-radius: 1rem;
+  // translate: 0 0.25rem;
+}
+
+.btn-text {
+  border-radius: 1rem;
+  font-size: 2.15rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  translate: 0 -0.5rem;
+  height: 100%;
+  width: 100%;
+}
+
+.btn-text:active {
+  translate: 0 -0.2rem;
+}
+
+.btn-roll {
+  background-color: var(--colorBtnRollBg);
+}
+
+.btn-roll-text {
+  background-color: var(--colorAccent);
+  color: #f8e9e9;
+}
+.btn-restart {
+  background-color: hsl(349deg, 77%, 40%);
+}
+
+.btn-restart-text {
+  border: 2px solid var(--colorAccent);
+  background-color: hsl(344deg, 100%, 77%);
+  color: var(--colorAccent);
+}

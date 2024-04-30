@@ -1,0 +1,45 @@
+@keyframes arrow-animation {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-25%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes rotating-background {
+  from {
+    rotate: 0;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+
+@keyframes zoom-in {
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 1;
+  }
+
+}
+
+// for small devices
+@keyframes zoom-in-sd {
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 0.8;
+  }
+
+}

@@ -1,0 +1,45 @@
+:root {
+  --colorBgLighter: #3d0409;
+  --colorBgDarker: #170204;
+  --colorText: #a73b4b;
+  --colorContainerBorder: hsl(355deg 100% 15%);
+  /* --colorContentBg: #DCABC0; */
+  --colorContentBg: #dcabc0;
+  --colorBtnRollBg: hsl(355deg 83% 28%);
+  --colorAccent: #bb1120;
+  --colorTableHead: #f2a0b0;
+  --colorTableNumbers: #5b333a;
+  --colorTableBorder: hsl(349deg 77% 23%);
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--colorBgDarker);
+  color: var(--colorAccent);
+  font-size: 1.6rem;
+}
+
+@media (max-width: 986px) {
+  body {
+    background-color: var(--colorBgLighter);
+  }
+}
+
+@media (min-width: calc(100vh + 600px)) {
+  body:has(nav.collapseSidebar) .statsContainer {
+    padding: 6% 6%;
+  }
+}

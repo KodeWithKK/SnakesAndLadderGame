@@ -1,0 +1,44 @@
+.mainContainer {
+  position: fixed;
+  top: 0;
+  left: 20rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: calc(100% - 20rem);
+  background: var(--colorBgLighter);
+  border-radius: 1rem 0 0 1rem;
+  padding: 0 10vh;
+  z-index: 0;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: calc(100vh + 600px)) {
+  .mainContainer {
+    position: relative;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.8rem;
+    padding: 2rem 0;
+  }
+}
+
+@media (max-width: calc(105vh + 200px)) {
+  .mainContainer {
+    width: 100%;
+    left: 0;
+    padding: 1.5rem 0 0;
+    margin: 8rem 0 7.9rem;
+    border-radius: 0;
+  }
+}
+
+@media (min-width: calc(105vh + 200px)) {
+  .adjustPadding {
+    left: 8rem;
+    padding: inherit 15vh;
+    width: calc(100% - 8rem);
+  }
+}

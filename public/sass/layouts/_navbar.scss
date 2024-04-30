@@ -1,0 +1,188 @@
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  background: var(--colorBgDarker);
+  height: 100vh; width: 20rem;
+  left: 0; top: 0;
+  padding-bottom: 1.5rem;
+  font-size: 1.55rem;
+  z-index: 25;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  p {
+    text-align: left;
+    margin-left: 1rem;
+    color: #f2a0b0;
+  }
+
+  @include screenMaxWidth(calc(105vh + 200px)) {
+    height: 8rem;
+    width: 100%;
+    flex-direction: column;
+    padding-bottom: 0rem;
+    border-radius: 0 0 1rem 1rem;
+    border-bottom: 1px solid var(--colorContainerBorder);
+  }
+
+  // ***** Container Header ***** //
+  .container-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2rem 5% 0;
+
+    @include screenMaxWidth(calc(105vh + 200px)) {
+      height: 8rem;
+      padding: 0 5%;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+      gap: 1rem;
+
+      @include screenMaxWidth(calc(105vh + 200px)) {
+        flex-direction: row;
+        margin: 0 auto 0 0;
+
+        p {
+          font-size: 2rem;
+        }
+      }
+
+      .icon {
+        height: 4rem;
+      }
+
+      .text {
+        text-align: center;
+        color: var(--colorAccent);
+      }
+    }
+
+    .menu-btn > *{
+      width: 2.6rem;
+      height: 0.3rem;
+      background: var(--colorAccent);
+    }
+
+    .menu-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 2.2rem;
+
+      @include screenMaxWidth(calc(105vh + 200px)) {
+        display: flex;
+      }
+    }
+
+  }
+
+  // ***** Container Navbtns ***** //
+  .container-nav-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%; width: 100%;
+
+    @include screenMaxWidth(calc(105vh + 200px)) {
+      display: none;
+      position: fixed;
+      background: var(--colorBgDarker);
+      height: calc(15rem + 0.05*20rem);
+      width: 20rem;
+      right: 0; top: 8rem;
+      border-radius: 1rem;
+      justify-content: center;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 5rem; width: 95%;
+      border-radius: 1rem;
+      padding-left: 2rem;
+
+      @include screenMaxWidth(calc(105vh + 200px)) {
+        &.nav-btn__side-bar {
+          display: none;
+        }
+      }
+
+      .icon {
+        height: 2rem;
+      }
+
+      &:hover {
+        background-color: #8F0D1850;
+        outline: 1px solid var(--colorContainerBorder);
+        cursor: pointer;
+
+        img {
+          scale: 1.1;
+        }
+      }
+    }
+
+    .nav-btn__restart-game {
+      margin-bottom: auto;
+
+      @include screenMaxWidth(calc(105vh + 200px)) {
+        margin-bottom: 0;
+      }
+    }
+
+  }
+}
+
+/* -----------------------
+     Collapse SideBar
+------------------------ */
+@include screenMinWidth (calc(105vh + 200px + 1px)) {
+
+  nav.collapse-sidebar{
+    width: 8rem;
+
+    p {
+      display: none;
+    }
+
+    .container-nav-btns {
+      .nav-btn {
+        height: 6.5rem; width: 6.5rem;
+        justify-content: center;
+        padding-left: 0rem;
+
+        > * {
+          height: 2.8rem;
+        }
+      }
+
+      .nav-btn__customize .icon{
+        height: 2.7rem;
+      }
+    }
+
+  }
+
+}
+
+/* ------------------------
+     Reveal Menu Btns
+------------------------- */
+nav.reveal-menu-btns {
+
+  .container-nav-btns {
+    display: flex;
+  }
+}

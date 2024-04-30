@@ -1,0 +1,73 @@
+.playerBox {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(10% - 0.2%);
+  width: calc(10% - 0.2%);
+  bottom: 2vh;
+  left: -8.5vh;
+  object-fit: contain;
+  z-index: 5;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 2rem var(--colorAccent));
+}
+
+.playerBox:has(.playerArrowImg) {
+  display: flex;
+  align-items: flex-end;
+  z-index: 10;
+}
+
+.playerCounterImg {
+  position: relative;
+  height: 82%;
+  width: 82%;
+}
+
+.playerArrowImg {
+  height: 65%;
+  margin-bottom: calc(100% - 9%);
+  animation: arrowAnimation 1.2s ease infinite;
+}
+
+.player1Box {
+  margin-bottom: 4%;
+}
+
+/* ================================ */
+
+@media (max-width: calc(105vh + 200px)) {
+  .playerBox {
+    bottom: 0.5%;
+    left: -9%;
+  }
+}
+
+/* ================================ */
+
+.fixBoxPosition {
+  --playerObjBoxHeight: calc(10% - 0.2%);
+  --playerObjBoxLeftShift: 1.05%;
+  --playerObjBoxBottomShift: 1.05%;
+
+  left: calc(-1 * var(--playerObjBoxHeight) + var(--playerObjBoxLeftShift));
+  bottom: calc(-1 * var(--playerObjBoxHeight) + var(--playerObjBoxBottomShift));
+  margin: 0;
+}
+
+/* ================================ */
+
+@keyframes arrowAnimation {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-25%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}

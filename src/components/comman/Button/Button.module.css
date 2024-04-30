@@ -1,0 +1,27 @@
+.btn {
+  position: relative;
+  display: solid;
+  height: 4.5rem;
+  width: 15rem;
+  border: 0;
+  background: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  /* translate: 0 0.25rem; */
+}
+
+.btn p {
+  border-radius: 1rem;
+  font-size: 2.15rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  translate: 0 -0.5rem;
+  height: 100%;
+  width: 100%;
+}
+
+.btn p:active {
+  translate: 0 -0.2rem;
+}
