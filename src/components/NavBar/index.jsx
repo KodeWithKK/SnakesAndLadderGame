@@ -4,10 +4,10 @@ import { AppContext } from "../../contexts/AppProvider";
 
 const NavBar = () => {
   const value = React.useContext(AppContext);
-  const { collapseSidebar, setCollapseSidebar, resetPlayerInfo } = value;
+  const { isSidebarCollapsed, setIsSidebarCollapsed, resetPlayerInfo } = value;
 
   return (
-    <nav className={`${collapseSidebar ? styles.collapseSidebar : ""}`}>
+    <nav className={`${isSidebarCollapsed ? styles.collapseSidebar : ""}`}>
       <div className={styles.containerHeader}>
         <div className={styles.logo}>
           <img src="img/Logo.svg" alt="logo" />
@@ -16,7 +16,7 @@ const NavBar = () => {
         <button
           className={styles.menuBtn}
           onClick={() => {
-            setCollapseSidebar(!collapseSidebar);
+            setIsSidebarCollapsed(!isSidebarCollapsed);
           }}
         >
           <div className="menu-btn__bar-1" />
@@ -42,10 +42,10 @@ const NavBar = () => {
         </NavBtn>
         <NavBtn
           title={"Reveal Side bar"}
-          src={`img/${collapseSidebar ? "Reveal" : "Collapse"}-Side-Bar.svg`}
+          src={`img/${isSidebarCollapsed ? "Reveal" : "Collapse"}-Side-Bar.svg`}
           className={styles.navBtn__sideBar}
           onClick={() => {
-            setCollapseSidebar(!collapseSidebar);
+            setIsSidebarCollapsed(!isSidebarCollapsed);
           }}
         >
           Hide Sidebar

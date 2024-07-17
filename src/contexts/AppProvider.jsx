@@ -1,32 +1,69 @@
-import React from "react";
+import { useState, useMemo, useCallback, createContext } from "react";
+import useRollDice from "../hooks/useRollDice";
 
-export const AppContext = React.createContext();
+export const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [collapseSidebar, setCollapseSidebar] = React.useState(false);
-  const [playersInfo, setPlayersInfo] = React.useState([player00, player01]);
-  const [currentPlayerNum, setCurrentPlayerNum] = React.useState(0);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [playersInfo, setPlayersInfo] = useState([player00, player01]);
+  const [activePlayerNum, setActivePlayerNum] = useState(0);
 
-  const intialPlayerInfo = React.useMemo(() => {
+  const intialPlayerInfo = useMemo(() => {
     return JSON.parse(JSON.stringify([player00, player01]));
   }, []);
 
-  const resetPlayerInfo = React.useCallback(() => {
+  const resetPlayerInfo = useCallback(() => {
     setPlayersInfo(JSON.parse(JSON.stringify(intialPlayerInfo)));
-    setCurrentPlayerNum(0);
+    setActivePlayerNum(0);
   }, [intialPlayerInfo]);
 
-  const appContextValue = React.useMemo(() => {
+  const setNextPlayerTurn = useCallback(() => {
+    setActivePlayerNum((prevNum) => {
+      return (prevNum + 1) % playersInfo.length;
+    });
+  }, [playersInfo.length]);
+
+  const activePlayer = useMemo(() => {
+    return playersInfo[activePlayerNum];
+  }, [playersInfo, activePlayerNum]);
+
+  const setActivePlayer = useCallback(
+    (nextActivePlayer) => {
+      setPlayersInfo((prevInfo) => {
+        const newInfo = [...prevInfo];
+        newInfo[activePlayerNum] = nextActivePlayer;
+        return newInfo;
+      });
+    },
+    [activePlayerNum]
+  );
+
+  const { diceVal, isPlayerMoving, handleBtnRoll } = useRollDice({
+    activePlayer,
+    setActivePlayer,
+    setNextPlayerTurn,
+  });
+
+  const appContextValue = useMemo(() => {
     return {
-      collapseSidebar,
-      setCollapseSidebar,
+      isSidebarCollapsed,
       playersInfo,
-      setPlayersInfo,
+      activePlayerNum,
+      diceVal,
+      isPlayerMoving,
+      setIsSidebarCollapsed,
       resetPlayerInfo,
-      currentPlayerNum,
-      setCurrentPlayerNum,
+      handleBtnRoll,
     };
-  }, [collapseSidebar, playersInfo, resetPlayerInfo, currentPlayerNum]);
+  }, [
+    isSidebarCollapsed,
+    playersInfo,
+    activePlayerNum,
+    diceVal,
+    isPlayerMoving,
+    resetPlayerInfo,
+    handleBtnRoll,
+  ]);
 
   return (
     <AppContext.Provider value={appContextValue}>

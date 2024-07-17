@@ -16,7 +16,7 @@ const StatsContainer = () => {
       }
     });
 
-    console.log(maxTilesMoved);
+    // console.log(maxTilesMoved);
 
     if (maxTilesMoved === 0) return -1;
     else return winningPlayerIndex;

@@ -1,5 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+// import "./utils/customlog.js"
 import "./styles.css";
 import App from "./App";
 import AppProvider from "./contexts/AppProvider";
