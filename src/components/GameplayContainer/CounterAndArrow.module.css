@@ -13,7 +13,7 @@
   filter: drop-shadow(0 0 2rem var(--colorAccent));
 }
 
-.playerBox:has(.playerArrowImg) {
+.playerBox:has(.playerArrowImgContainer) {
   display: flex;
   align-items: flex-end;
   z-index: 10;

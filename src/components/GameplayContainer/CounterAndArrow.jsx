@@ -1,13 +1,8 @@
 import { useMemo } from "react";
 import styles from "./CounterAndArrow.module.css";
+import { ArrowIcon } from "./Icons";
 
-function CounterAndArrow({
-  playerColor,
-  playerNumber,
-  playerInfo,
-  isPlayerActive,
-  gotWinner,
-}) {
+function CounterAndArrow({ playerInfo, isPlayerActive, gotWinner }) {
   const nextTranslation = useMemo(() => {
     if (playerInfo.tilesMoved !== 0) {
       return `${playerInfo.posX * 100}% -${playerInfo.posY * 100}%`;
@@ -17,19 +12,18 @@ function CounterAndArrow({
   return (
     <>
       <PlayerCounter
-        playerNumber={playerNumber}
-        playerColor={playerColor}
+        playerNumber={playerInfo.number}
+        playerColor={playerInfo.colorCode}
         hasPlayerMoved={playerInfo.tilesMoved > 0}
         nextTranslation={nextTranslation}
       />
-      {isPlayerActive && !gotWinner && (
-        <PlayerArrow
-          playerNumber={playerNumber}
-          playerColor={playerColor}
-          hasPlayerMoved={playerInfo.tilesMoved > 0}
-          nextTranslation={nextTranslation}
-        />
-      )}
+      <PlayerArrow
+        playerNumber={playerInfo.number}
+        playerColor={playerInfo.colorCode}
+        hasPlayerMoved={playerInfo.tilesMoved > 0}
+        nextTranslation={nextTranslation}
+        showIcon={isPlayerActive && !gotWinner}
+      />
     </>
   );
 }
@@ -49,7 +43,7 @@ function PlayerCounter({
     >
       <img
         className={styles.playerCounterImg}
-        src={`img/buttons/btn-${playerColor}.webp`}
+        src={`img/counters/${playerColor}.webp`}
         alt={`${playerColor} Counter`}
       />
     </div>
@@ -61,6 +55,7 @@ function PlayerArrow({
   playerColor,
   hasPlayerMoved,
   nextTranslation,
+  showIcon,
 }) {
   return (
     <div
@@ -69,13 +64,36 @@ function PlayerArrow({
       }`}
       style={{ translate: nextTranslation }}
     >
-      <img
-        className={styles.playerArrowImg}
-        src={`img/buttons/down-arrow-${playerColor}.svg`}
-        alt={`${playerColor} Arrow`}
-      />
+      <div className={styles.playerArrowImgContainer}>
+        {showIcon && (
+          <ArrowIcon
+            className={styles.playerArrowImg}
+            fgColor={arrowColors[playerColor].foreground}
+            bgColor={arrowColors[playerColor].background}
+          />
+        )}
+      </div>
     </div>
   );
 }
+
+const arrowColors = {
+  red: {
+    foreground: "#F91E7E",
+    background: "#B80261",
+  },
+  yellow: {
+    foreground: "#fcbd03",
+    background: "#f76c23",
+  },
+  blue: {
+    foreground: "#25a6e1",
+    background: "#0376bf",
+  },
+  green: {
+    foreground: "#81c23f",
+    background: "#029644",
+  },
+};
 
 export default CounterAndArrow;

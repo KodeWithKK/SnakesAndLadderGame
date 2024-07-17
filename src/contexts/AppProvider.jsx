@@ -1,11 +1,19 @@
 import { useState, useMemo, useCallback, createContext } from "react";
 import useRollDice from "../hooks/useRollDice";
+import { produce } from "immer";
 
 export const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [playersInfo, setPlayersInfo] = useState([player00, player01]);
+  const [totalPlayers, setTotalPlayers] = useState(2);
+  const [playerNames, setPlayerNames] = useState([
+    "Red Player",
+    "Yellow Player",
+  ]);
+  const [playersInfo, setPlayersInfo] = useState(() => {
+    return intializePlayersInfo(totalPlayers, playerNames);
+  });
   const [activePlayerNum, setActivePlayerNum] = useState(0);
   const [winnerPlayer, setWinnerPlayer] = useState(null);
 
@@ -21,11 +29,11 @@ const AppProvider = ({ children }) => {
 
   const setActivePlayer = useCallback(
     (nextActivePlayer) => {
-      setPlayersInfo((prevInfo) => {
-        const newInfo = [...prevInfo];
-        newInfo[activePlayerNum] = nextActivePlayer;
-        return newInfo;
-      });
+      setPlayersInfo(
+        produce((draftInfo) => {
+          draftInfo[activePlayerNum] = nextActivePlayer;
+        })
+      );
     },
     [activePlayerNum]
   );
@@ -38,12 +46,12 @@ const AppProvider = ({ children }) => {
   });
 
   const handleRestart = useCallback(() => {
-    const nextPlayersInfo = JSON.parse(JSON.stringify([player00, player01]));
+    const nextPlayersInfo = intializePlayersInfo(totalPlayers, playerNames);
     setPlayersInfo(nextPlayersInfo);
     setActivePlayerNum(0);
     setDiceVal(1);
     setWinnerPlayer(null);
-  }, [setDiceVal]);
+  }, [totalPlayers, playerNames, setDiceVal]);
 
   const appContextValue = useMemo(() => {
     return {
@@ -75,22 +83,25 @@ const AppProvider = ({ children }) => {
   );
 };
 
-const player00 = {
-  name: "Red Player",
-  posX: 0,
-  posY: 1,
-  tilesMoved: 0,
-  snakeBites: 0,
-  ladderClimbs: 0,
-};
+const colorCodeSequence = ["red", "yellow", "blue", "green"];
 
-const player01 = {
-  name: "Yellow Player",
-  posX: 0,
-  posY: 1,
-  tilesMoved: 0,
-  snakeBites: 0,
-  ladderClimbs: 0,
-};
+function intializePlayersInfo(totalPlayers, playerNames) {
+  const playersInfo = [];
+
+  for (let i = 0; i < totalPlayers; i++) {
+    playersInfo.push({
+      name: playerNames[i],
+      colorCode: colorCodeSequence[i],
+      number: i,
+      posX: 0,
+      posY: 1,
+      tilesMoved: 0,
+      snakeBites: 0,
+      ladderClimbs: 0,
+    });
+  }
+
+  return playersInfo;
+}
 
 export default AppProvider;

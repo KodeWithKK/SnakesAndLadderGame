@@ -41,20 +41,14 @@ const GameplayContainer = () => {
           </div>
         </div>
         {/* Players Counters and Arrow */}
-        <CounterAndArrow
-          playerColor="yellow"
-          playerNumber={1}
-          playerInfo={playersInfo[1]}
-          isPlayerActive={activePlayerNum === 1}
-          gotWinner={!!winnerPlayer}
-        />
-        <CounterAndArrow
-          playerColor="red"
-          playerNumber={0}
-          playerInfo={playersInfo[0]}
-          isPlayerActive={activePlayerNum === 0}
-          gotWinner={!!winnerPlayer}
-        />
+        {playersInfo.map((playerInfo) => (
+          <CounterAndArrow
+            key={playerInfo.number}
+            playerInfo={playerInfo}
+            isPlayerActive={activePlayerNum === playerInfo.number}
+            gotWinner={!!winnerPlayer}
+          />
+        ))}
       </div>
       <div className={styles.containerDiceAndRollBtn}>
         <img

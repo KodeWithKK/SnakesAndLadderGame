@@ -1,8 +1,0 @@
-.primary-heading {
-  font-weight: 600;
-  font-size: 2.8rem;
-
-  @include screenMaxWidth(986px) {
-    font-size: 2.4rem;
-  }
-}

@@ -1,11 +1,11 @@
-import React from "react";
+import { useContext, useCallback } from "react";
 import styles from "./StatsContainer.module.css";
 import { AppContext } from "../../contexts/AppProvider";
 
 const StatsContainer = () => {
-  const { collapseSidebar, playersInfo } = React.useContext(AppContext);
+  const { collapseSidebar, playersInfo } = useContext(AppContext);
 
-  const getWinningPlayer = React.useCallback(() => {
+  const getWinningPlayer = useCallback(() => {
     let winningPlayerIndex = 0;
     let maxTilesMoved = playersInfo[0].tilesMoved;
 
@@ -15,8 +15,6 @@ const StatsContainer = () => {
         maxTilesMoved = player.tilesMoved;
       }
     });
-
-    // console.log(maxTilesMoved);
 
     if (maxTilesMoved === 0) return -1;
     else return winningPlayerIndex;
@@ -44,7 +42,7 @@ const StatsContainer = () => {
         <tbody>
           <tr className="stats__player-0">
             <th>
-              <img src="img/buttons/btn-red.webp" alt="Red-Counter" />
+              <img src="img/counters/red.webp" alt="Red-Counter" />
             </th>
             <th className={styles.colName}>Red Player</th>
             <td className="snakes-bites">{playersInfo[0].snakeBites}</td>
@@ -61,7 +59,7 @@ const StatsContainer = () => {
           </tr>
           <tr className="stats__player-1">
             <th>
-              <img src="img/buttons/btn-yellow.webp" alt="Yellow-Counter" />
+              <img src="img/counters/yellow.webp" alt="Yellow-Counter" />
             </th>
             <th className={styles.colName}>Yellow Player</th>
             <td className="snakes-bites">{playersInfo[1].snakeBites}</td>
