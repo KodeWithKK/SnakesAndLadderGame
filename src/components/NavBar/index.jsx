@@ -4,7 +4,7 @@ import { AppContext } from "../../contexts/AppProvider";
 
 const NavBar = () => {
   const value = React.useContext(AppContext);
-  const { isSidebarCollapsed, setIsSidebarCollapsed, resetPlayerInfo } = value;
+  const { isSidebarCollapsed, setIsSidebarCollapsed, handleRestart } = value;
 
   return (
     <nav className={`${isSidebarCollapsed ? styles.collapseSidebar : ""}`}>
@@ -28,7 +28,7 @@ const NavBar = () => {
         <NavBtn
           title={"New Game"}
           src={"img/Dice Icon.svg"}
-          onClick={() => window.alert("Feature to ab added soon...")}
+          onClick={() => window.alert("Feature to be added soon...")}
         >
           New Game
         </NavBtn>
@@ -36,7 +36,7 @@ const NavBar = () => {
           title={"Restart Game"}
           src={"img/Restart Icon.svg"}
           className={styles.navBtn__restartGame}
-          onClick={resetPlayerInfo}
+          onClick={handleRestart}
         >
           Restart Game
         </NavBtn>

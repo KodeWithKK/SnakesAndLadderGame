@@ -6,6 +6,7 @@ function CounterAndArrow({
   playerNumber,
   playerInfo,
   isPlayerActive,
+  gotWinner,
 }) {
   const nextTranslation = useMemo(() => {
     if (playerInfo.tilesMoved !== 0) {
@@ -21,7 +22,7 @@ function CounterAndArrow({
         hasPlayerMoved={playerInfo.tilesMoved > 0}
         nextTranslation={nextTranslation}
       />
-      {isPlayerActive && (
+      {isPlayerActive && !gotWinner && (
         <PlayerArrow
           playerNumber={playerNumber}
           playerColor={playerColor}
@@ -39,8 +40,6 @@ function PlayerCounter({
   hasPlayerMoved,
   nextTranslation,
 }) {
-  // console.log("Counter Re-rendered");
-
   return (
     <div
       className={`${styles.playerBox} ${styles[`player${playerNumber}Box`]} ${

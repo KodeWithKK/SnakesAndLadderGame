@@ -7,15 +7,7 @@ const AppProvider = ({ children }) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [playersInfo, setPlayersInfo] = useState([player00, player01]);
   const [activePlayerNum, setActivePlayerNum] = useState(0);
-
-  const intialPlayerInfo = useMemo(() => {
-    return JSON.parse(JSON.stringify([player00, player01]));
-  }, []);
-
-  const resetPlayerInfo = useCallback(() => {
-    setPlayersInfo(JSON.parse(JSON.stringify(intialPlayerInfo)));
-    setActivePlayerNum(0);
-  }, [intialPlayerInfo]);
+  const [winnerPlayer, setWinnerPlayer] = useState(null);
 
   const setNextPlayerTurn = useCallback(() => {
     setActivePlayerNum((prevNum) => {
@@ -38,11 +30,20 @@ const AppProvider = ({ children }) => {
     [activePlayerNum]
   );
 
-  const { diceVal, isPlayerMoving, handleBtnRoll } = useRollDice({
+  const { diceVal, isPlayerMoving, setDiceVal, handleBtnRoll } = useRollDice({
     activePlayer,
     setActivePlayer,
     setNextPlayerTurn,
+    setWinnerPlayer,
   });
+
+  const handleRestart = useCallback(() => {
+    const nextPlayersInfo = JSON.parse(JSON.stringify([player00, player01]));
+    setPlayersInfo(nextPlayersInfo);
+    setActivePlayerNum(0);
+    setDiceVal(1);
+    setWinnerPlayer(null);
+  }, [setDiceVal]);
 
   const appContextValue = useMemo(() => {
     return {
@@ -51,8 +52,9 @@ const AppProvider = ({ children }) => {
       activePlayerNum,
       diceVal,
       isPlayerMoving,
+      winnerPlayer,
       setIsSidebarCollapsed,
-      resetPlayerInfo,
+      handleRestart,
       handleBtnRoll,
     };
   }, [
@@ -61,7 +63,8 @@ const AppProvider = ({ children }) => {
     activePlayerNum,
     diceVal,
     isPlayerMoving,
-    resetPlayerInfo,
+    winnerPlayer,
+    handleRestart,
     handleBtnRoll,
   ]);
 

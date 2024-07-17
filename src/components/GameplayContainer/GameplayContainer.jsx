@@ -10,7 +10,9 @@ const GameplayContainer = () => {
     isPlayerMoving,
     playersInfo,
     activePlayerNum,
+    winnerPlayer,
     handleBtnRoll,
+    handleRestart,
   } = useContext(AppContext);
 
   return (
@@ -21,7 +23,10 @@ const GameplayContainer = () => {
           src="img/snakeAndLadderCompressed.webp"
           alt="Snakes-and-Ladders-Board"
         />
-        <div className={styles.containerWinner}>
+        <div
+          className={styles.containerWinner}
+          style={{ display: winnerPlayer ? "block" : "none" }}
+        >
           <div className={styles.containerWinner__bg} />
           <div className={styles.containerWinner__content}>
             <img
@@ -29,8 +34,10 @@ const GameplayContainer = () => {
               src="img/trophy.svg"
               alt="trophy-img"
             />
-            <p className={styles.winnerText} />
-            <Button className={styles.btnRestart}>Restart</Button>
+            <p className={styles.winnerText}>Winner is {winnerPlayer?.name}</p>
+            <Button className={styles.btnRestart} onClick={handleRestart}>
+              Restart
+            </Button>
           </div>
         </div>
         {/* Players Counters and Arrow */}
@@ -39,12 +46,14 @@ const GameplayContainer = () => {
           playerNumber={1}
           playerInfo={playersInfo[1]}
           isPlayerActive={activePlayerNum === 1}
+          gotWinner={!!winnerPlayer}
         />
         <CounterAndArrow
           playerColor="red"
           playerNumber={0}
           playerInfo={playersInfo[0]}
           isPlayerActive={activePlayerNum === 0}
+          gotWinner={!!winnerPlayer}
         />
       </div>
       <div className={styles.containerDiceAndRollBtn}>
@@ -53,9 +62,11 @@ const GameplayContainer = () => {
           src={`img/Dice Images/Dice-${diceVal}.svg`}
           alt=""
         />
-        <Button className={styles.btnRoll} onClick={handleBtnRoll}>
-          {isPlayerMoving ? "Wait..." : "Roll Dice"}
-        </Button>
+        {!winnerPlayer && (
+          <Button className={styles.btnRoll} onClick={handleBtnRoll}>
+            {isPlayerMoving ? "Wait..." : "Roll Dice"}
+          </Button>
+        )}
       </div>
     </div>
   );
