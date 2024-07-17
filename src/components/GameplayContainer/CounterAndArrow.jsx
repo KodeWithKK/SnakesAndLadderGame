@@ -16,14 +16,16 @@ function CounterAndArrow({ playerInfo, isPlayerActive, gotWinner }) {
         playerColor={playerInfo.colorCode}
         hasPlayerMoved={playerInfo.tilesMoved > 0}
         nextTranslation={nextTranslation}
+        isPlayerActive={isPlayerActive}
       />
-      <PlayerArrow
-        playerNumber={playerInfo.number}
-        playerColor={playerInfo.colorCode}
-        hasPlayerMoved={playerInfo.tilesMoved > 0}
-        nextTranslation={nextTranslation}
-        showIcon={isPlayerActive && !gotWinner}
-      />
+      {isPlayerActive && !gotWinner && (
+        <PlayerArrow
+          playerNumber={playerInfo.number}
+          playerColor={playerInfo.colorCode}
+          hasPlayerMoved={playerInfo.tilesMoved > 0}
+          nextTranslation={nextTranslation}
+        />
+      )}
     </>
   );
 }
@@ -33,13 +35,17 @@ function PlayerCounter({
   playerColor,
   hasPlayerMoved,
   nextTranslation,
+  isPlayerActive,
 }) {
   return (
     <div
       className={`${styles.playerBox} ${styles[`player${playerNumber}Box`]} ${
         hasPlayerMoved ? styles.fixBoxPosition : ""
       }`}
-      style={{ translate: nextTranslation }}
+      style={{
+        translate: nextTranslation,
+        zIndex: `${isPlayerActive ? "10" : "5"}`,
+      }}
     >
       <img
         className={styles.playerCounterImg}
@@ -55,7 +61,6 @@ function PlayerArrow({
   playerColor,
   hasPlayerMoved,
   nextTranslation,
-  showIcon,
 }) {
   return (
     <div
@@ -64,14 +69,13 @@ function PlayerArrow({
       }`}
       style={{ translate: nextTranslation }}
     >
-      <div className={styles.playerArrowImgContainer}>
-        {showIcon && (
-          <ArrowIcon
-            className={styles.playerArrowImg}
-            fgColor={arrowColors[playerColor].foreground}
-            bgColor={arrowColors[playerColor].background}
-          />
-        )}
+      <div className={styles.playerArrowImg}>
+        <ArrowIcon
+          fgColor={arrowColors[playerColor].foreground}
+          bgColor={arrowColors[playerColor].background}
+          width="100%"
+          height="100%"
+        />
       </div>
     </div>
   );
