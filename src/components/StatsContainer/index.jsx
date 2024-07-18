@@ -23,10 +23,10 @@ const StatsContainer = () => {
   return (
     <div
       className={`${styles.statsContainer} ${
-        collapseSidebar && styles.adjustPadding
+        collapseSidebar ? styles.adjustPadding : ""
       }`}
     >
-      <h1 className={`text-player-turn ${styles.primaryHeading}`}>Stats</h1>
+      <h1 className={`text-player-turn`}>Summary</h1>
       <table cellSpacing={0}>
         <thead className={styles.tHeadTop}>
           <tr>

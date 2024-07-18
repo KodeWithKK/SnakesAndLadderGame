@@ -15,7 +15,6 @@
 .statsContainer h1 {
   margin-bottom: 2rem;
   font-weight: 600;
-  font-size: 2.8rem;
 }
 
 .statsContainer table {
@@ -46,10 +45,6 @@
 .statsContainer table td {
   padding: 0.5rem;
   font-weight: 600;
-}
-
-.statsContainer table th,
-.statsContainer table td {
   font-size: 1.6rem;
 }
 

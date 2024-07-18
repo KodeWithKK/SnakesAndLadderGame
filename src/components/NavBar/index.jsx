@@ -54,7 +54,7 @@ const NavBar = () => {
           title={"Customize"}
           src={"img/customize-icon.svg"}
           className={styles.navBtn__customize}
-          onClick={() => window.alert("Feature to ab added soon...")}
+          onClick={() => window.alert("Feature to be added soon...")}
         >
           Customize
         </NavBtn>
